@@ -38,6 +38,7 @@ const Playlist = (props) => {
         key={`${track.title}${track.artist}`}
         {...track}
         onChangeCallback={props.onItemChange}
+        onClickCallback={props.onButtonClick}
       />
     );
   });

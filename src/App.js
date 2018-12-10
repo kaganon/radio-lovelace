@@ -20,8 +20,25 @@ class App extends Component {
 
   onStarChange = (id) => {
     let favoriteChange = this.state.allSongs;
-    favoriteChange[id].favorite = !favoriteChange[id].favorite;
-    this.setState({allSongs: favoriteChange});
+
+    favoriteChange.forEach((song, i) => {
+      if (id === i) {
+        favoriteChange[id].favorite = !favoriteChange[id].favorite;
+        this.setState({allSongs: favoriteChange});
+      };
+    });
+  };
+
+  onButtonClick = (id) => {
+
+    let trackOrder = this.state.allSongs;
+
+    console.log(trackOrder)
+    let topTrack = trackOrder[id];
+    trackOrder.splice(id, 1);
+
+    trackOrder.splice(0,0,topTrack);
+    this.setState({allSongs: trackOrder});
   };
 
 
@@ -32,7 +49,8 @@ class App extends Component {
           <h1 className="page-header--title">Radio Lovelace</h1>
         </header>
         <main className="main">
-          <RadioSet tracks={songData} onChangeCallback={this.onStarChange}/>
+          <RadioSet tracks={songData} onChangeCallback={this.onStarChange}
+              buttonClick={this.onButtonClick}/>
         </main>
       </div>
     );
